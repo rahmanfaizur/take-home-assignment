@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileHeader from '@/components/profile/ProfileHeader';
-import CollectionsGrid from '@/components/collections/CollectionsGrid';
+import ProfileTabs from '@/components/profile/ProfileTabs';
 
-export default function HomeScreen() {
+export default function ProfileScreen() {
   const scrollY = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler({
@@ -21,7 +21,7 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
         <ProfileHeader scrollY={scrollY} />
-        <CollectionsGrid />
+        <ProfileTabs />
       </Animated.ScrollView>
     </SafeAreaView>
   );
