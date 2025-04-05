@@ -9,8 +9,8 @@ import Animated, {
 import { ThemedText } from '@/components/ThemedText';
 import ProfileAvatar from './ProfileAvatar';
 
-const HEADER_MAX_HEIGHT = 380; // Increased from 300
-const HEADER_MIN_HEIGHT = 280; // Increased from 200
+const HEADER_MAX_HEIGHT = 350; // Increased from 300
+const HEADER_MIN_HEIGHT = 250; // Increased from 200
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function ProfileHeader({ scrollY } : any) {
@@ -63,7 +63,7 @@ export default function ProfileHeader({ scrollY } : any) {
             </Pressable>
           </View>
 
-          <ThemedText style={styles.location}>India</ThemedText>
+          <ThemedText style={styles.location}>🇮🇳 INDIA</ThemedText>
           
           <ThemedText style={styles.bio}>
             18 yo with high ambitions. want to build cool {'\n'}
@@ -71,7 +71,13 @@ export default function ProfileHeader({ scrollY } : any) {
           </ThemedText>
 
           <View style={styles.followingSection}>
-            <ThemedText style={styles.followingCount}>2</ThemedText>
+            <View style={styles.followingCountContainer}>
+              <Image 
+                source={require('@/assets/images/UserCheck.png')}
+                style={styles.userCheckIcon}
+              />
+              <ThemedText style={styles.followingCount}>2</ThemedText>
+            </View>
             <ThemedText style={styles.followingLabel}>FOLLOWING</ThemedText>
           </View>
         </View>
@@ -116,6 +122,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: 'flex-start',
     marginTop: 16,
+    marginLeft: -8,
   },
   headerRow: {
     flexDirection: 'row',
@@ -129,10 +136,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'CircularBold',
     color: '#fff',
     marginRight: 4,
+    fontWeight: '900',
   },
   verifiedIcon: {
     width: 16,
@@ -144,39 +152,57 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   editText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'rgba(255,255,255,0.6)',
     fontFamily: 'CircularBook',
+    textDecorationLine: "underline",
+    textDecorationStyle: "dotted",
   },
   pencilIcon: {
-    width: 16,
+    width: 12,
     height: 16,
     tintColor: 'rgba(255,255,255,0.6)',
+    textDecorationLine: "underline",
+    textDecorationStyle: "dotted",
   },
   location: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#fff',
     fontFamily: 'CircularBook',
     marginBottom: 5,
+    fontWeight: '100',
   },
   bio: {
     fontSize: 14,
-    color: '#fff',
+    color: 'rgba(255,255,255,0.6)',
     fontFamily: 'CircularBook',
     lineHeight: 20,
-    marginBottom: 16,
+    marginBottom: 10,
+    fontWeight: '100',
   },
   followingSection: {
-    marginTop: 8,
+    marginTop: 4,
+  },
+  followingCountContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginBottom: 4,
+  },
+  userCheckIcon: {
+    width: 16,
+    height: 16,
+    tintColor: '#fff',
   },
   followingCount: {
     fontSize: 18,
     color: '#fff',
     fontFamily: 'CircularBold',
-    marginBottom: 4,
   },
   followingLabel: {
-    fontSize: 14,
+    fontSize: 12,
+    marginTop: -4,
+    fontWeight: '100',
     color: 'rgba(255,255,255,0.6)',
     fontFamily: 'CircularBook',
   },
