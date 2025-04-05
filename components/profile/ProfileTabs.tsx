@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#83838A',
     fontFamily: 'CircularBook',
+    fontWeight: '600',
   },
   activeTabText: {
     color: '#7B61FF',

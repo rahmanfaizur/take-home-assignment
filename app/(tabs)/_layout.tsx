@@ -24,13 +24,13 @@ export default function TabLayout() {
       <Tabs.Screen
         name="collections"
         options={{
-          title: 'Collections',
+          title: 'COLLECTIONS',
         }}
       />
       <Tabs.Screen
         name="manageTags"
         options={{
-          title: 'Manage Tags',
+          title: 'MANAGE TAGS',
         }}
       />
     </Tabs>
