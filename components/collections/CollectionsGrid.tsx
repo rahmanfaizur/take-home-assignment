@@ -7,9 +7,9 @@ const COLUMN_GAP = 12;
 const ITEM_WIDTH = (width - 32 - COLUMN_GAP) / 2;
 
 const collections = [
-  { id: 1, image: require('@/assets/images/f1.png'), title: 'Portraits', count: 12 },
-  { id: 2, image: require('@/assets/images/f2.png'), title: 'Landscapes', count: 8 },
-  { id: 3, image: require('@/assets/images/f3.png'), title: 'Urban', count: 15 },
+  { id: 1, image: require('@/assets/images/f1.png')},
+  { id: 2, image: require('@/assets/images/f2.png')},
+  { id: 3, image: require('@/assets/images/f3.png')},
 ];
 
 const CollectionsGrid = () => {
@@ -23,10 +23,6 @@ const CollectionsGrid = () => {
               style={styles.image}
               resizeMode="cover"
             />
-            <View style={styles.overlay}>
-              <ThemedText style={styles.title}>{collection.title}</ThemedText>
-              <ThemedText style={styles.count}>{collection.count} items</ThemedText>
-            </View>
           </Pressable>
         ))}
       </View>
