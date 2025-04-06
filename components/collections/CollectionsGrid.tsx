@@ -11,10 +11,10 @@ const collections = [
   { 
     id: 1, 
     images: [
-      require('@/assets/images/c1.png'),
       require('@/assets/images/c2.png'),
-      require('@/assets/images/c3.png'),
-      require('@/assets/images/c4.png')
+      require('@/assets/images/c1.png'),
+      require('@/assets/images/c4.png'),
+      require('@/assets/images/c3.png')
     ],
     title: 'LIKED (32)',
     items: 12,
@@ -26,8 +26,8 @@ const collections = [
   { 
     id: 2, 
     images: [
-      require('@/assets/images/c5.png'),
-      require('@/assets/images/c6.png')
+      require('@/assets/images/c6.png'),
+      require('@/assets/images/c5.png')
     ],
     title: 'SAVED (23)',
     items: 8,
@@ -98,7 +98,7 @@ const CollectionsGrid = () => {
     if (activeTab === 'collections') {
       return (
         <LinearGradient
-          colors={['#1A1A1A', '#101010']} // Darker gradient colors
+          colors={['#1A1A1A', '#101010']}
           style={styles.gradientContainer}
         >
           <View style={styles.grid}>
@@ -114,7 +114,7 @@ const CollectionsGrid = () => {
     }
     return (
       <LinearGradient
-        colors={['#1A1A1A', '#101010']} // Darker gradient colors
+        colors={['#1A1A1A', '#101010']} 
         style={styles.tagsContainer}
       >
         <ThemedText style={styles.tagsTitle}>
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   tagItem: {
     flexDirection: 'row',
-    alignItems: 'center', // Changed from 'flex-start' to 'center'
+    alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 16,
     borderBottomWidth: 1,
