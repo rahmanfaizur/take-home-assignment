@@ -73,13 +73,14 @@ const CollectionsGrid = () => {
     return (
       <View style={styles.tagsContainer}>
         <ThemedText style={styles.tagsTitle}>
-          our recommendations work best when you let us know these things:
+          our recommendations work best when you {'\n'}
+           let us know these things:
         </ThemedText>
         
         <View style={styles.tagItems}>
           <Pressable style={styles.tagItem}>
             <View>
-              <ThemedText style={styles.tagText}>your difficulty ✨</ThemedText>
+              <ThemedText style={styles.tagText}>YOUR DIFFICULTY ✨</ThemedText>
               <ThemedText style={styles.tagDescription}>
                 you decide the level of challenge you want!
               </ThemedText>
@@ -92,7 +93,7 @@ const CollectionsGrid = () => {
 
           <Pressable style={styles.tagItem}>
             <View>
-              <ThemedText style={styles.tagText}>interests you like ✨</ThemedText>
+              <ThemedText style={styles.tagText}>INTERESTS YOU LIKE ✨</ThemedText>
               <ThemedText style={styles.tagDescription}>
                 we'll use these to show you cool builds
               </ThemedText>
@@ -105,9 +106,9 @@ const CollectionsGrid = () => {
 
           <Pressable style={styles.tagItem}>
             <View>
-              <ThemedText style={styles.tagText}>tools used 🛠️</ThemedText>
+              <ThemedText style={styles.tagText}>TOOLS USED 🛠️</ThemedText>
               <ThemedText style={styles.tagDescription}>
-                We'll suggest better using these picks
+                we'll suggest better using these picks
               </ThemedText>
             </View>
             <Image 
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 2,
-    borderBottomColor: '#00FF00', // Changed from #7B61FF to green
+    borderBottomColor: '#07E79D',
   },
   tabContent: {
     flexDirection: 'row',
@@ -187,20 +188,21 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tabIcon: {
-    width: 16,
-    height: 16,
+    width: 20,
+    height: 20,
     tintColor: 'rgba(255,255,255,0.6)',
   },
   activeTabIcon: {
-    tintColor: '#00FF00', // Changed from #7B61FF to green
+    tintColor: '#07E79D',
   },
   tabText: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgba(255,255,255,0.6)',
     fontFamily: 'CircularBook',
+    letterSpacing: 0.5
   },
   activeTabText: {
-    color: '#00FF00', // Changed from #7B61FF to green
+    color: '#07E79D',
     fontFamily: 'CircularBold',
   },
   tagsContainer: {
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
   },
   tagsTitle: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.6)',
+    color: 'rgb(255, 255, 255)',
     fontFamily: 'CircularBook',
     marginBottom: 24,
     lineHeight: 20,
@@ -229,8 +231,10 @@ const styles = StyleSheet.create({
   tagText: {
     fontSize: 16,
     color: '#FFFFFF',
-    fontFamily: 'CircularBook',
+    fontWeight: "400",
     marginBottom: 4, // Added margin for description
+    letterSpacing: 0.1,
+    fontFamily: 'sans-serif'
   },
   tagDescription: {
     fontSize: 14,

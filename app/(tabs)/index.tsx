@@ -1,8 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import CollectionsGrid from '@/components/collections/CollectionsGrid';
+
+const HEADER_MAX_HEIGHT = 310; // Height of the ProfileHeader
 
 export default function HomeScreen() {
   const scrollY = useSharedValue(0);
@@ -14,25 +15,29 @@ export default function HomeScreen() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      {/* ProfileHeader remains fixed at the top */}
+      <ProfileHeader scrollY={scrollY} />
+
+      {/* Scrollable content */}
       <Animated.ScrollView
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}>
-        <ProfileHeader scrollY={scrollY} />
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingTop: HEADER_MAX_HEIGHT, // Add padding equal to the header height
+        }}
+      >
+        {/* Scrollable content starts below the header */}
         <CollectionsGrid />
       </Animated.ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  scrollContent: {
-    flexGrow: 1,
+    backgroundColor: '#000', // Black background
   },
 });

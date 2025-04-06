@@ -19,8 +19,8 @@ export default function ProfileAvatar() {
 
 const styles = StyleSheet.create({
   container: {
-    width: 120,
-    height: 120,
+    width: 80,
+    height: 80,
     marginTop: -60,
     marginLeft: -10,
   },

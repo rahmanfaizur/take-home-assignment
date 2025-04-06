@@ -1,19 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { 
   useAnimatedStyle, 
   interpolate,
-  Extrapolate 
+  Extrapolate,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  Easing
 } from 'react-native-reanimated';
 import { ThemedText } from '@/components/ThemedText';
 import ProfileAvatar from './ProfileAvatar';
 
-const HEADER_MAX_HEIGHT = 350; // Increased from 300
-const HEADER_MIN_HEIGHT = 250; // Increased from 200
+const HEADER_MAX_HEIGHT = 310; // Increased from 300
+const HEADER_MIN_HEIGHT = 200; // Increased from 200
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const BG_SCALE = 1; // Increase image width coverage
+const ANIMATION_DURATION = 15000; // Animation duration in ms
+
+const BackgroundImage = ({ style }) => (
+  <Animated.Image 
+    source={require('@/assets/images/1.png')}
+    style={[styles.backgroundImage, style]}
+  />
+);
 
 export default function ProfileHeader({ scrollY } : any) {
+  const translateX = useSharedValue(0);
+
+  useEffect(() => {
+    translateX.value = 0;
+    translateX.value = withRepeat(
+      withTiming(-SCREEN_WIDTH, {
+        duration: ANIMATION_DURATION,
+        easing: Easing.linear
+      }),
+      -1, // Infinite repetition
+      false // Don't reverse animation
+    );
+  }, []);
+
   const headerStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(
@@ -22,11 +50,29 @@ export default function ProfileHeader({ scrollY } : any) {
         [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
         Extrapolate.CLAMP
       ),
+      zIndex: 2, // Ensure header stays above content
+    };
+  });
+
+  const imageStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: translateX.value },
+        { scale: BG_SCALE } // Increased scale for better coverage
+      ]
     };
   });
 
   return (
     <Animated.View style={[styles.container, headerStyle]}>
+      <View style={styles.backgroundContainer}>
+        <BackgroundImage style={[imageStyle]} />
+        <BackgroundImage style={[imageStyle, { left: SCREEN_WIDTH }]} />
+      </View>
+      <LinearGradient
+        colors={['#23044A', '#101216']}
+        style={styles.gradient}
+      />
       <BlurView intensity={20} style={styles.headerContent}>
         <View style={styles.topButtons}>
           <Pressable style={styles.iconButton}>
@@ -55,11 +101,13 @@ export default function ProfileHeader({ scrollY } : any) {
               />
             </View>
             <Pressable style={styles.editButton}>
-              <ThemedText style={styles.editText}>EDIT PROFILE</ThemedText>
-              <Image 
-                source={require('@/assets/images/pencil.png')}
-                style={styles.pencilIcon}
-              />
+              <View style={styles.editContent}>
+                <ThemedText style={styles.editText}>EDIT PROFILE</ThemedText>
+                <Image 
+                  source={require('@/assets/images/pencil.png')}
+                  style={styles.pencilIcon}
+                />
+              </View>
             </Pressable>
           </View>
 
@@ -88,9 +136,36 @@ export default function ProfileHeader({ scrollY } : any) {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     height: HEADER_MAX_HEIGHT,
     overflow: 'hidden',
     backgroundColor: '#000000',
+  },
+  backgroundContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: SCREEN_WIDTH,
+    height: '100%',
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    opacity: 0.85,
   },
   headerContent: {
     flex: 1,
@@ -149,21 +224,25 @@ const styles = StyleSheet.create({
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  editContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.6)',
+    borderStyle: 'dotted',
+    paddingBottom: 2,
   },
   editText: {
     fontSize: 12,
     color: 'rgba(255,255,255,0.6)',
     fontFamily: 'CircularBook',
-    textDecorationLine: "underline",
-    textDecorationStyle: "dotted",
   },
   pencilIcon: {
     width: 12,
     height: 16,
     tintColor: 'rgba(255,255,255,0.6)',
-    textDecorationLine: "underline",
-    textDecorationStyle: "dotted",
   },
   location: {
     fontSize: 12,
