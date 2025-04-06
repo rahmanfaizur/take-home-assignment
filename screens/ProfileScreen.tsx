@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileTabs from '@/components/profile/ProfileTabs';
 
-const HEADER_MAX_HEIGHT = 310; // Match the height of ProfileHeader
+const HEADER_MAX_HEIGHT = 310;
 
 export default function ProfileScreen() {
   const scrollY = useSharedValue(0);
@@ -17,17 +17,15 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* ProfileHeader is now outside the ScrollView */}
       <ProfileHeader scrollY={scrollY} />
 
       <Animated.ScrollView
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         contentContainerStyle={{
-          paddingTop: HEADER_MAX_HEIGHT, // Add padding equal to the header height
+          paddingTop: HEADER_MAX_HEIGHT, 
         }}
         showsVerticalScrollIndicator={false}>
-        {/* Scrollable content starts below the header */}
         <ProfileTabs />
       </Animated.ScrollView>
     </SafeAreaView>

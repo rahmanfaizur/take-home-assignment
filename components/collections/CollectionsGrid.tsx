@@ -1,15 +1,55 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Dimensions, Pressable } from 'react-native';
+import { View, StyleSheet, Dimensions, Pressable, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
+import CollectionCard from './CollectionCard';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const { width } = Dimensions.get('window');
 const COLUMN_GAP = 12;
-const ITEM_WIDTH = (width - 32 - COLUMN_GAP) / 2;
+
 
 const collections = [
-  { id: 1, image: require('@/assets/images/f1.png')},
-  { id: 2, image: require('@/assets/images/f2.png')},
-  { id: 3, image: require('@/assets/images/f3.png')},
+  { 
+    id: 1, 
+    images: [
+      require('@/assets/images/c1.png'),
+      require('@/assets/images/c2.png'),
+      require('@/assets/images/c3.png'),
+      require('@/assets/images/c4.png')
+    ],
+    title: 'LIKED (32)',
+    items: 12,
+    isLiked: true,
+    isBookmarked: false,
+    inFolder: true,
+    icon: require('@/assets/images/heart.png')
+  },
+  { 
+    id: 2, 
+    images: [
+      require('@/assets/images/c5.png'),
+      require('@/assets/images/c6.png')
+    ],
+    title: 'SAVED (23)',
+    items: 8,
+    isLiked: false,
+    isBookmarked: true,
+    inFolder: false,
+    icon: require('@/assets/images/bookmark.png')
+  },
+  { 
+    id: 3, 
+    images: [
+      require('@/assets/images/c7.png'),
+      require('@/assets/images/c8.png'),
+      require('@/assets/images/c9.png')
+    ],
+    title: 'FILES (3)',
+    items: 15,
+    isLiked: true,
+    isBookmarked: true,
+    inFolder: true,
+    icon: require('@/assets/images/folder.png')
+  },
 ];
 
 const CollectionsGrid = () => {
@@ -57,24 +97,29 @@ const CollectionsGrid = () => {
   const renderContent = () => {
     if (activeTab === 'collections') {
       return (
-        <View style={styles.grid}>
-          {collections.map((collection) => (
-            <Pressable key={collection.id} style={styles.item}>
-              <Image 
-                source={collection.image}
-                style={styles.image}
-                resizeMode="cover"
+        <LinearGradient
+          colors={['#1A1A1A', '#101010']} // Darker gradient colors
+          style={styles.gradientContainer}
+        >
+          <View style={styles.grid}>
+            {collections.map((collection) => (
+              <CollectionCard 
+                key={collection.id}
+                collection={collection}
               />
-            </Pressable>
-          ))}
-        </View>
+            ))}
+          </View>
+        </LinearGradient>
       );
     }
     return (
-      <View style={styles.tagsContainer}>
+      <LinearGradient
+        colors={['#1A1A1A', '#101010']} // Darker gradient colors
+        style={styles.tagsContainer}
+      >
         <ThemedText style={styles.tagsTitle}>
           our recommendations work best when you {'\n'}
-           let us know these things:
+          let us know these things:
         </ThemedText>
         
         <View style={styles.tagItems}>
@@ -117,7 +162,7 @@ const CollectionsGrid = () => {
             />
           </Pressable>
         </View>
-      </View>
+      </LinearGradient>
     );
   };
 
@@ -132,51 +177,33 @@ const CollectionsGrid = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: 'transparent',
+  },
+  gradientContainer: {
+    flex: 1,
+    width: '100%',
+    paddingTop: 20,
+    borderRadius: 0,
   },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: COLUMN_GAP,
     padding: 16,
-  },
-  item: {
-    width: ITEM_WIDTH,
-    height: ITEM_WIDTH,
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  overlay: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 12,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  title: {
-    fontSize: 16,
-    color: '#fff',
-    fontFamily: 'CircularBold',
-  },
-  count: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
-    fontFamily: 'CircularBook',
+    paddingTop: 0,
+    borderRadius: 0, 
   },
   tabContainer: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 0, 
   },
   tab: {
     flex: 1,
     paddingVertical: 16,
     alignItems: 'center',
+    borderRadius: 0, 
   },
   activeTab: {
     borderBottomWidth: 2,
@@ -208,7 +235,6 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#000',
   },
   tagsTitle: {
     fontSize: 14,
@@ -222,7 +248,7 @@ const styles = StyleSheet.create({
   },
   tagItem: {
     flexDirection: 'row',
-    alignItems: 'flex-start', // Changed from 'center' to align with top text
+    alignItems: 'center', // Changed from 'flex-start' to 'center'
     justifyContent: 'space-between',
     paddingVertical: 16,
     borderBottomWidth: 1,
@@ -232,7 +258,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#FFFFFF',
     fontWeight: "400",
-    marginBottom: 4, // Added margin for description
+    marginBottom: 4,
     letterSpacing: 0.1,
     fontFamily: 'sans-serif'
   },

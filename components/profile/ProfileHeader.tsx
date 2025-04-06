@@ -14,13 +14,13 @@ import Animated, {
 import { ThemedText } from '@/components/ThemedText';
 import ProfileAvatar from './ProfileAvatar';
 
-const HEADER_MAX_HEIGHT = 310; // Increased from 300
-const HEADER_MIN_HEIGHT = 200; // Increased from 200
+const HEADER_MAX_HEIGHT = 310; 
+const HEADER_MIN_HEIGHT = 200; 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const BG_SCALE = 1; // Increase image width coverage
-const ANIMATION_DURATION = 15000; // Animation duration in ms
+const BG_SCALE = 1; 
+const ANIMATION_DURATION = 15000; 
 
-const BackgroundImage = ({ style }) => (
+const BackgroundImage = ({ style } : any) => (
   <Animated.Image 
     source={require('@/assets/images/1.png')}
     style={[styles.backgroundImage, style]}
@@ -37,8 +37,8 @@ export default function ProfileHeader({ scrollY } : any) {
         duration: ANIMATION_DURATION,
         easing: Easing.linear
       }),
-      -1, // Infinite repetition
-      false // Don't reverse animation
+      -1,
+      false
     );
   }, []);
 
@@ -50,7 +50,7 @@ export default function ProfileHeader({ scrollY } : any) {
         [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
         Extrapolate.CLAMP
       ),
-      zIndex: 2, // Ensure header stays above content
+      zIndex: 2,
     };
   });
 
@@ -58,7 +58,7 @@ export default function ProfileHeader({ scrollY } : any) {
     return {
       transform: [
         { translateX: translateX.value },
-        { scale: BG_SCALE } // Increased scale for better coverage
+        { scale: BG_SCALE } 
       ]
     };
   });
@@ -70,7 +70,7 @@ export default function ProfileHeader({ scrollY } : any) {
         <BackgroundImage style={[imageStyle, { left: SCREEN_WIDTH }]} />
       </View>
       <LinearGradient
-        colors={['#23044A', '#101216']}
+        colors={['#23044A', '#06010a']}
         style={styles.gradient}
       />
       <BlurView intensity={20} style={styles.headerContent}>
@@ -179,14 +179,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   iconButton: {
-    width: 40,
-    height: 40,
+    width: 32,
+    height: 32,
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconImage: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     tintColor: '#fff',
   },
   profileContainer: {
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   userCheckIcon: {
     width: 16,
     height: 16,
-    tintColor: '#fff',
+    tintColor: '#58A9DF',
   },
   followingCount: {
     fontSize: 18,
